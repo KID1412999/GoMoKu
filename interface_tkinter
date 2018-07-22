@@ -1,0 +1,22 @@
+#tkinter制作的简易界面
+from tkinter import *
+canvas_width = 300
+canvas_height =300
+master = Tk()
+canvas = Canvas(master, 
+           width=canvas_width, 
+           height=canvas_height)
+canvas.pack()
+img=PhotoImage(file="C:/Users/Administrator/Desktop/python练习/mokugo.png")
+img_b=PhotoImage(file="C:/Users/Administrator/Desktop/python练习/黑棋.png")
+img_w=PhotoImage(file="C:/Users/Administrator/Desktop/python练习/白棋.png")
+canvas.create_image(313,313,image=img,anchor=SE)
+canvas.create_line(76,18,76,295,fill='green',width=2)
+for i in range(15):
+	 canvas.create_line(18,20*i+16,295,20*i+16,fill='green',width=2)
+	 canvas.create_line(20*i+16,18,20*i+16,295,fill='green',width=2)
+
+def draw(x,y,q):
+	canvas.create_image(x*20+18,y*20+18,image=q)
+draw(10,8,img_b)
+mainloop()
