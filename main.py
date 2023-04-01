@@ -33,10 +33,10 @@ class Eay(Frame):
         x1, y1 = max(0, x - padding), max(0, y - padding)
         x2, y2 = min(14, x + padding), min(14, y + padding)
         line_strs = {}
-        line_strs['horizontal'] = ''.join(str(self.a[y, x]) for x in range(x1, x2 + 1))
-        line_strs['vertical'] = ''.join(str(self.a[y, x]) for y in range(y1, y2 + 1))
-        line_strs['diagonal1'] = ''.join(str(self.a[j, i]) for i, j in zip(range(x1, x2 + 1), range(y1, y2 + 1)))
-        line_strs['diagonal2'] = ''.join(str(self.a[j, i]) for i, j in zip(range(x1, x2 + 1), reversed(range(y1, y2 + 1))))
+        line_strs['horizontal'] = ''.join(str(self.a[x, y]) for x in range(x1, x2 + 1))
+        line_strs['vertical'] = ''.join(str(self.a[x, y]) for y in range(y1, y2 + 1))
+        line_strs['diagonal1'] = ''.join(str(self.a[i, j]) for i, j in zip(range(x1, x2 + 1), range(y1, y2 + 1)))
+        line_strs['diagonal2'] = ''.join(str(self.a[i, j]) for i, j in zip(range(x1, x2 + 1), reversed(range(y1, y2 + 1))))
         print(self.a)
         for key, line in line_strs.items():
             if '00000' in line:
