@@ -8,22 +8,25 @@ class Eay(Frame):
     profits_={}#白方每个点的收益
     P=[]#每个点的各项指标
     def search(self,x,y):
-        d=[-1,0,1]
-        for w in range(3):
-            for u in range(3):
-                t=''
-                if u==1 and w==1:#跳过这种情况
-                    continue
-                for i in range(5):#步长5，包含本身
-                    if x+i*d[w]<15 and x+i*d[w]>-1 and y+i*d[u]>-1 and y+i*d[u]<15:
-                        t+=str(self.a[x+i*d[w]][y+i*d[u]])
-                print(x,y,t)
-                if '00000'==t:
-                    print('黑棋胜！')
-                    break
-                elif '11111'==t:
-                    print('白棋胜！')
-                    break
+
+        padding = 4
+        x1, y1 = max(0, x - padding), max(0, y - padding)
+        x2, y2 = min(14, x + padding), min(14, y + padding)
+        line_strs = {}
+        line_strs['horizontal'] = ''.join(str(self.a[y, x]) for x in range(x1, x2 + 1))
+        line_strs['vertical'] = ''.join(str(self.a[y, x]) for y in range(y1, y2 + 1))
+        line_strs['diagonal1'] = ''.join(str(self.a[j, i]) for i, j in zip(range(x1, x2 + 1), range(y1, y2 + 1)))
+        line_strs['diagonal2'] = ''.join(str(self.a[j, i]) for i, j in zip(range(x1, x2 + 1), reversed(range(y1, y2 + 1))))
+        for key, line in line_strs.items():
+            print(line)
+            if '00000' in line:
+                print('黑棋胜！')
+                break
+            elif '11111' in line:
+                print('白棋胜！')
+                break
+        else:
+            print('未分胜负！')
         s=np.array(self.a)#打印数字棋盘
         os.system("cls")#清屏
         print('board \n',s.T)
